@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoice · Elite Promo Girls</title>
+  <!-- Font Awesome & html2pdf (for PDF export) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0b0f1a;  /* dark background outside invoice container */
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+    }
+    .invoice-container {
+      max-width: 1000px;
+      width: 100%;
+      background: #fcfdff;  /* light invoice container */
+      border-radius: 28px;
+      padding: 2.5rem 2.8rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
+      transition: 0.2s;
+    }
+    /* header / logo */
+    .invoice-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 1.2rem;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo-circle {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: #0b1a33;
+      border: 2px solid #2d5bff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .logo-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .brand h2 {
+      font-weight: 400;
+      letter-spacing: 2px;
+      color: #0b1a33;
+      font-size: 1.6rem;
+      margin-bottom: 0.1rem;
+    }
+    .brand small {
+      color: #4a5b7a;
+      letter-spacing: 2px;
+      font-weight: 300;
+    }
+    .invoice-meta {
+      text-align: right;
+    }
+    .invoice-meta .inv-number {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #1a2a4a;
+    }
+    .invoice-meta .date {
+      color: #5a6f94;
+      font-weight: 300;
+      font-size: 0.9rem;
+    }
+
+    /* client & supplier row */
+    .client-supplier-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      gap: 1.5rem;
+      background: #f8faff;
+      padding: 1.2rem 1.5rem;
+      border-radius: 18px;
+      border: 1px solid #e9edf5;
+    }
+    .client-box, .supplier-box {
+      min-width: 180px;
+    }
+    .client-box label, .supplier-box label {
+      display: block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #5d6f92;
+      margin-bottom: 0.2rem;
+    }
+    .client-box input, .supplier-box input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      font-size: 1rem;
+      font-weight: 400;
+      color: #0b1a33;
+      border-bottom: 1px dashed #b8c7e0;
+      padding: 0.3rem 0;
+      outline: none;
+      transition: 0.1s;
+    }
+    .client-box input:focus, .supplier-box input:focus {
+      border-bottom-color: #2d5bff;
+    }
+    .supplier-box input {
+      text-align: right;
+    }
+
+    /* table */
+    .invoice-table-wrap {
+      overflow-x: auto;
+      margin: 1.5rem 0 1.2rem 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+    th {
+      text-align: left;
+      padding: 0.8rem 0.4rem 0.6rem 0.4rem;
+      font-weight: 400;
+      letter-spacing: 1px;
+      color: #1f3153;
+      border-bottom: 2px solid #dce3ef;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+    td {
+      padding: 0.6rem 0.4rem;
+      border-bottom: 1px solid #eef2f8;
+      vertical-align: middle;
+    }
+    td input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      font-size: 0.95rem;
+      color: #121f3a;
+      padding: 0.2rem 0;
+      outline: none;
+    }
+    td input:focus {
+      background: #f4f9ff;
+      border-radius: 6px;
+      padding-left: 6px;
+    }
+    .col-item { min-width: 150px; }
+    .col-qty, .col-price, .col-total { min-width: 80px; }
+    .col-total { font-weight: 400; color: #0b1a33; }
+
+    .row-actions {
+      width: 30px;
+      text-align: center;
+    }
+    .delete-row-btn {
+      background: none;
+      border: none;
+      color: #b0c2da;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: 0.1s;
+      padding: 4px;
+    }
+    .delete-row-btn:hover {
+      color: #d14545;
+      transform: scale(1.1);
+    }
+
+    /* totals – no tax, only subtotal + grand total */
+    .totals-row {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin-top: 0.5rem;
+      padding-top: 0.8rem;
+      border-top: 2px solid #dce3ef;
+    }
+    .totals-line {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .totals-line .subtotal {
+      color: #2c405e;
+      font-weight: 300;
+      font-size: 0.95rem;
+    }
+    .totals-line .subtotal span {
+      font-weight: 400;
+      color: #0f2442;
+      min-width: 80px;
+      display: inline-block;
+      text-align: right;
+    }
+    .grand-total-box {
+      background: #0b1a33;
+      color: white;
+      padding: 0.5rem 2rem;
+      border-radius: 60px;
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      font-weight: 300;
+      margin-top: 0.5rem;
+      display: inline-block;
+    }
+    .grand-total-box span {
+      font-weight: 400;
+    }
+
+    /* action buttons */
+    .action-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .btn {
+      border: none;
+      background: #f0f4fe;
+      padding: 0.7rem 2rem;
+      border-radius: 60px;
+      font-weight: 400;
+      font-size: 0.95rem;
+      color: #1a2f57;
+      cursor: pointer;
+      transition: 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid transparent;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .btn i { color: #2d5bff; }
+    .btn-primary {
+      background: #0b1a33;
+      color: white;
+      border: none;
+    }
+    .btn-primary i { color: #b0caff; }
+    .btn-primary:hover { background: #1a2f57; }
+    .btn:hover { background: #e4ecfe; }
+    .btn-primary:hover { background: #1a2f57; }
+
+    /* Add line button – now OUTSIDE container */
+    .add-row-btn-wrapper {
+      max-width: 1000px;
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .add-row-btn {
+      background: transparent;
+      border: 1px dashed #8da0c7;
+      padding: 0.5rem 2rem;
+      border-radius: 40px;
+      color: #2d4a7a;
+      cursor: pointer;
+      transition: 0.1s;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #f0f4fe;
+    }
+    .add-row-btn:hover {
+      background: #eaf0fe;
+      border-color: #2d5bff;
+    }
+
+    .signature-note {
+      margin-top: 1.8rem;
+      text-align: right;
+      font-weight: 300;
+      color: #5a719a;
+      letter-spacing: 1px;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 1.2rem;
+      font-style: italic;
+    }
+
+    @media (max-width: 700px) {
+      .invoice-container { padding: 1.5rem; }
+      .client-supplier-row { flex-direction: column; }
+      .brand h2 { font-size: 1.3rem; }
+      .grand-total-box { font-size: 1.3rem; padding: 0.3rem 1.5rem; }
+      .logo-circle { width: 60px; height: 60px; }
+    }
+  </style>
+</head>
+<body>
+<div class="invoice-container" id="invoiceContent">
+  <!-- header with logo -->
+  <div class="invoice-header">
+    <div class="header-left">
+      <div class="logo-circle">
+        <img src="images/EPG.jpeg" alt="Elite Promo Girls logo">
+      </div>
+      <div class="brand">
+        <h2>Elite Promo Girls</h2>
+        <small>promotional · activation</small>
+      </div>
+    </div>
+    <div class="invoice-meta">
+      <div class="inv-number">
+        <i class="fas fa-receipt" style="color:#2d5bff; margin-right:6px;"></i> 
+        <input type="text" value="" id="invoiceNumber" placeholder="INV-2026-XXX" style="border:none; background:transparent; font-weight:400; font-size:1.2rem; width:140px; color:#0b1a33; outline:none; border-bottom:1px dashed #b8c7e0;">
+      </div>
+      <div class="date">
+        <i class="far fa-calendar-alt"></i> 
+        <input type="text" value="" id="invoiceDate" placeholder="19 May 2026" style="border:none; background:transparent; width:130px; font-size:0.9rem; color:#3a537a; outline:none; border-bottom:1px dashed #b8c7e0;">
+      </div>
+    </div>
+  </div>
+
+  <!-- client & supplier (editable) -->
+  <div class="client-supplier-row">
+    <div class="client-box">
+      <label><i class="fas fa-user-tie"></i> Billed to</label>
+      <input type="text" id="clientName" value="" placeholder="Company name">
+      <input type="text" id="clientAddress" value="" placeholder="Address" style="margin-top:6px; font-size:0.85rem;">
+    </div>
+    <div class="supplier-box">
+      <label><i class="fas fa-building"></i> Supplied by</label>
+      <input type="text" id="supplierName" value="Elite Promo Girls" style="text-align:right;">
+      <input type="text" id="supplierContact" value="068 074 6254" style="text-align:right; font-size:0.85rem; margin-top:6px;" placeholder="Phone only">
+    </div>
+  </div>
+
+  <!-- table items -->
+  <div class="invoice-table-wrap">
+    <table id="invoiceTable">
+      <thead>
+        <tr>
+          <th class="col-item">Item / Service</th>
+          <th class="col-qty">Quantity</th>
+          <th class="col-price">Unit Price (R)</th>
+          <th class="col-total">Total (R)</th>
+          <th style="width:30px;"></th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <!-- rows will be populated by JS -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- totals – tax removed -->
+  <div class="totals-row" id="totalsSection">
+    <div class="totals-line">
+      <div class="subtotal">Subtotal <span id="subtotalDisplay">0.00</span></div>
+    </div>
+    <div class="grand-total-box">
+      <i class="fas fa-file-invoice" style="font-size:1.2rem; margin-right:8px; opacity:0.8;"></i> R <span id="grandTotalDisplay">0.00</span>
+    </div>
+  </div>
+
+  <!-- signature / thanks -->
+  <div class="signature-note">
+    <i class="fas fa-pen" style="color:#2d5bff;"></i> Thank you for your business! 
+    <span style="display:block; font-weight:300; font-size:0.8rem; color:#6c84b0;">Elite Promo Girls · professional · presentable · energetic</span>
+  </div>
+</div>
+
+<!-- ADD ROW BUTTON – now OUTSIDE the container -->
+<div class="add-row-btn-wrapper">
+  <button class="add-row-btn" id="addRowBtn"><i class="fas fa-plus-circle"></i> Add line</button>
+</div>
+
+<!-- action buttons (download PDF) -->
+<div class="action-bar">
+  <button class="btn" id="resetBtn"><i class="fas fa-undo-alt"></i> Reset</button>
+  <button class="btn btn-primary" id="downloadBtn"><i class="fas fa-file-pdf"></i> Export PDF</button>
+</div>
+
+<script>
+  (function() {
+    // ----- helper: format number -----
+    function fmt(n) { return parseFloat(n).toFixed(2); }
+
+    // ----- reference to table body -----
+    const tbody = document.getElementById('tableBody');
+    const addRowBtn = document.getElementById('addRowBtn');
+    const subtotalSpan = document.getElementById('subtotalDisplay');
+    const grandTotalSpan = document.getElementById('grandTotalDisplay');
+
+    // ----- create a new row with delete button -----
+    function createRow(item = '', qty = 1, price = 0) {
+      const tr = document.createElement('tr');
+      tr.className = 'invoice-row';
+      tr.innerHTML = `
+        <td><input type="text" class="item-input" value="${item}" placeholder="Product / service"></td>
+        <td><input type="number" class="qty-input" value="${qty}" min="0" step="1" style="width:60px;"></td>
+        <td><input type="number" class="price-input" value="${price}" min="0" step="0.01" style="width:80px;"></td>
+        <td class="row-total" style="font-weight:400; color:#0b1a33;">${fmt(price * qty)}</td>
+        <td class="row-actions">
+          <button class="delete-row-btn" title="Remove row"><i class="fas fa-trash-alt"></i></button>
+        </td>
+      `;
+      // attach event listeners to inputs inside this row
+      const qtyInput = tr.querySelector('.qty-input');
+      const priceInput = tr.querySelector('.price-input');
+      const deleteBtn = tr.querySelector('.delete-row-btn');
+      
+      function updateRowTotal() {
+        const q = parseFloat(qtyInput.value) || 0;
+        const p = parseFloat(priceInput.value) || 0;
+        const total = q * p;
+        tr.querySelector('.row-total').textContent = fmt(total);
+        updateTotals();
+      }
+      qtyInput.addEventListener('input', updateRowTotal);
+      priceInput.addEventListener('input', updateRowTotal);
+      
+      // delete row
+      deleteBtn.addEventListener('click', function() {
+        tr.remove();
+        updateTotals();
+      });
+
+      return tr;
+    }
+
+    // ----- update totals (subtotal, grand) -----
+    function updateTotals() {
+      let subtotal = 0;
+      const rows = tbody.querySelectorAll('tr.invoice-row');
+      rows.forEach(row => {
+        const q = parseFloat(row.querySelector('.qty-input').value) || 0;
+        const p = parseFloat(row.querySelector('.price-input').value) || 0;
+        subtotal += q * p;
+      });
+      subtotalSpan.textContent = fmt(subtotal);
+      grandTotalSpan.textContent = fmt(subtotal); // no tax, grand = subtotal
+    }
+
+    // ----- add row with default values (empty) -----
+    function addRow(item = '', qty = 1, price = 0) {
+      const row = createRow(item, qty, price);
+      tbody.appendChild(row);
+      updateTotals();
+    }
+
+    // ----- reset to empty (no data) -----
+    function resetToEmpty() {
+      // clear client fields (except supplier defaults)
+      document.getElementById('clientName').value = '';
+      document.getElementById('clientAddress').value = '';
+      document.getElementById('supplierName').value = 'Elite Promo Girls';
+      document.getElementById('supplierContact').value = '068 074 6254';
+      document.getElementById('invoiceNumber').value = '';
+      document.getElementById('invoiceDate').value = '';
+      // clear table
+      tbody.innerHTML = '';
+      // add one empty row for convenience
+      addRow('', 1, 0);
+      updateTotals();
+    }
+
+    // ----- export PDF (html2pdf) with logo centered at top, no extra margin -----
+    function exportPDF() {
+      const element = document.getElementById('invoiceContent');
+      // Use minimal margin to start from top, and let the content flow.
+      const opt = {
+        margin:        [0, 0, 0, 0],  // start from very top
+        filename:     `Invoice_${document.getElementById('invoiceNumber').value || 'EPG'}.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, letterRendering: true, useCORS: true },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
+    }
+
+    // ----- event listeners -----
+    addRowBtn.addEventListener('click', function() {
+      addRow('', 1, 0);
+    });
+
+    document.getElementById('downloadBtn').addEventListener('click', exportPDF);
+
+    document.getElementById('resetBtn').addEventListener('click', function() {
+      resetToEmpty();
+    });
+
+    // initial load: empty with one row
+    resetToEmpty();
+
+    // re-calc totals on any change (delegation)
+    tbody.addEventListener('input', function(e) {
+      if (e.target.classList.contains('qty-input') || e.target.classList.contains('price-input') || e.target.classList.contains('item-input')) {
+        updateTotals();
+      }
+    });
+
+  })();
+</script>
+<!-- additional style for inputs in table -->
+<style>
+  .invoice-row td input:focus {
+    background: #f4f9ff;
+    border-radius: 4px;
+    padding-left: 4px;
+  }
+  .invoice-row td input[type="number"] {
+    -moz-appearance: textfield;
+  }
+  .invoice-row td input[type="number"]::-webkit-inner-spin-button,
+  .invoice-row td input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+</style>
+</body>
+</html>

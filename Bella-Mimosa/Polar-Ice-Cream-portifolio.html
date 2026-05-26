@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Elite Promo Girls · Polar Ice Cream Proposal</title>
+  <link rel="icon" type="image/x-icon" href="images/EPG.jpeg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0a0f1c;
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      display: flex;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      min-height: 100vh;
+      background-image: radial-gradient(circle at 15% 40%, #14203e 0%, #03060c 100%);
+    }
+
+    /* main proposal card */
+    .proposal-container {
+      max-width: 1200px;
+      width: 100%;
+      background: #0c1126;
+      border-radius: 3rem;
+      padding: 2.5rem 3rem;
+      box-shadow: 0 30px 55px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(59, 110, 255, 0.25), 0 0 40px rgba(0, 160, 255, 0.08);
+      border: 1px solid #25386e;
+      transition: all 0.2s;
+    }
+
+    /* header + logo */
+    .brand-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #1f2f5a;
+      padding-bottom: 1.5rem;
+    }
+
+    .logo-badge {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo-circle {
+      width: 85px;
+      height: 85px;
+      background: #0a0f1f;
+      border-radius: 50%;
+      border: 2px solid #3b6eff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(59, 110, 255, 0.3);
+    }
+
+    .logo-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .agency-name h2 {
+      font-weight: 500;
+      letter-spacing: 2px;
+      font-size: 1.7rem;
+      color: #f0f4ff;
+    }
+
+    .agency-name p {
+      color: #7c99e0;
+      letter-spacing: 3px;
+      font-size: 0.7rem;
+      font-weight: 300;
+    }
+
+    .proposal-title {
+      text-align: right;
+    }
+
+    .proposal-title .badge {
+      background: #132142;
+      padding: 0.45rem 1.5rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      color: #b6cbff;
+      border: 1px solid #2b4682;
+      display: inline-block;
+    }
+
+    .proposal-title h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #FFFFFF, #7fa2ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-top: 0.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    .client-strip {
+      background: #111b34;
+      border-radius: 60px;
+      padding: 0.9rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin: 1rem 0 2rem 0;
+      border: 1px solid #2a3f72;
+      font-size: 0.9rem;
+      color: #d2e0ff;
+    }
+
+    .client-strip i {
+      color: #4c7eff;
+      margin-right: 8px;
+      width: 24px;
+    }
+
+    /* sections */
+    .section {
+      margin-top: 2.2rem;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-left: 5px solid #3b6eff;
+      padding-left: 18px;
+      margin-bottom: 1.2rem;
+    }
+
+    .section-title i {
+      font-size: 1.4rem;
+      color: #3b6eff;
+      width: 32px;
+    }
+
+    .section-title h3 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: #f0f6ff;
+    }
+
+    .text {
+      color: #d2ddfa;
+      line-height: 1.65;
+      font-weight: 300;
+      font-size: 0.98rem;
+      margin-bottom: 1rem;
+      padding-left: 6px;
+    }
+
+    .text strong {
+      color: white;
+      font-weight: 500;
+    }
+
+    .grid-two {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 0.5rem 1.8rem;
+      margin: 0.8rem 0 0.8rem 0;
+      list-style: none;
+    }
+
+    .grid-two li {
+      color: #d2e0fc;
+      font-weight: 300;
+      padding: 0.3rem 0 0.3rem 28px;
+      position: relative;
+      font-size: 0.94rem;
+    }
+
+    .grid-two li::before {
+      content: "▹";
+      position: absolute;
+      left: 6px;
+      color: #3b6eff;
+      font-size: 0.8rem;
+      top: 5px;
+    }
+
+    .highlight-box {
+      background: #0f1837;
+      border-radius: 32px;
+      padding: 1.2rem 2rem;
+      margin: 1rem 0;
+      border: 1px solid #263f7a;
+    }
+
+    .pill-badge {
+      background: #1e2f5a;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      display: inline-block;
+      margin-bottom: 0.8rem;
+      letter-spacing: 1px;
+      color: #b2c7ff;
+    }
+
+    /* gallery adapted */
+    .gallery-modern {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0.9rem;
+      margin: 1.5rem 0 0.6rem 0;
+    }
+
+    .gallery-card {
+      background: #0a1024;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid #253b6c;
+      transition: 0.2s ease;
+      aspect-ratio: 1 / 1;
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .rate-block {
+      background: #0d1532;
+      border-radius: 48px;
+      padding: 0.9rem 2rem;
+      display: inline-block;
+      border: 1px solid #3b6eff;
+      margin: 0.5rem 0 0.5rem 0;
+      backdrop-filter: blur(4px);
+    }
+
+    .rate-amount {
+      font-size: 1.8rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+      color: #ffffff;
+    }
+
+    .rate-note {
+      color: #90abf0;
+      font-size: 0.85rem;
+      margin-left: 12px;
+    }
+
+    .signature {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin-top: 2.8rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #1f2f5e;
+    }
+
+    .signature .name {
+      font-size: 1.25rem;
+      letter-spacing: 2px;
+      font-weight: 400;
+      color: #f0f4ff;
+    }
+
+    .signature .role {
+      color: #98afea;
+      font-weight: 300;
+    }
+
+    .signature .contact-line {
+      margin-top: 6px;
+      color: #a4b9f0;
+      font-size: 0.9rem;
+    }
+
+    .signature .contact-line i {
+      margin-right: 8px;
+      color: #3b6eff;
+    }
+
+    .footer-motto {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.7rem;
+      color: #4460a0;
+      letter-spacing: 3px;
+      border-top: 1px solid #1b2753;
+      padding-top: 1rem;
+    }
+
+    @media (max-width: 760px) {
+      .proposal-container {
+        padding: 1.5rem;
+      }
+      .brand-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .proposal-title {
+        text-align: left;
+      }
+      .client-strip {
+        flex-direction: column;
+        gap: 0.8rem;
+        align-items: flex-start;
+      }
+      .section-title h3 {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="proposal-container">
+    
+    <!-- HEADER with logo and title -->
+    <div class="brand-header">
+      <div class="logo-badge">
+        <div class="logo-circle">
+          <img src="images/EPG.jpeg" alt="Elite Promo Girls logo">
+        </div>
+        <div class="agency-name">
+          <h2>Elite Promo Girls</h2>
+          <p>BRAND MARKETING &amp; ACTIVATION</p>
+        </div>
+      </div>
+      <div class="proposal-title">
+        <div class="badge"><i class="fas fa-ice-cream"></i> PARTNERSHIP PROPOSAL</div>
+        <h1>POLAR ICE CREAM</h1>
+      </div>
+    </div>
+
+    <!-- quick client strip -->
+    <div class="client-strip">
+      <span><i class="fas fa-calendar-check"></i> May 2026</span>
+      <span><i class="fas fa-ice-cream"></i> Polar Ice Cream · Sharing Happiness</span>
+      <span><i class="fas fa-hand-peace"></i> Experiential Activation</span>
+      <span><i class="fas fa-star"></i> Elite Promo Girls x Polar</span>
+    </div>
+
+    <!-- MAIN BODY – replaced with Polar Ice Cream content -->
+    <div class="section">
+      <div class="section-title">
+        <i class="fas fa-pen-fancy"></i>
+        <h3>Introduction</h3>
+      </div>
+      <div class="text">
+        Good day Polar Ice Cream Team,
+      </div>
+      <div class="text">
+        My name is <strong>Amahle Phakathi</strong>, representing a premium brand activation and experiential marketing agency that specialises in delivering high-impact consumer engagement through carefully curated promotional talent and strategic in-person brand experiences.
+      </div>
+      <div class="text">
+        We are reaching out to formally express our interest in establishing a collaboration with <strong>Polar Ice Cream</strong> across future activations, sponsorship initiatives, and experiential campaigns.
+      </div>
+    </div>
+
+    <!-- OUR STANDARD / HIGH EXECUTION -->
+    <div class="section">
+      <div class="section-title">
+        <i class="fas fa-crown"></i>
+        <h3>Our Standard of Execution</h3>
+      </div>
+      <div class="text">
+        Our agency operates at a high standard of execution, providing professionally trained brand ambassadors, promotional teams, and event staff who are selected not only for presentation and communication excellence, but also for their ability to authentically embody and elevate brand identity in live consumer environments.
+      </div>
+      <div class="text">
+        We focus on creating refined, memorable, and conversion-driven brand experiences through:
+      </div>
+      <ul class="grid-two">
+        <li>Premium brand activations and experiential campaigns</li>
+        <li>Professional promotional staffing and brand ambassador programmes</li>
+        <li>Product launches, sampling campaigns, and retail activations</li>
+        <li>Community-facing engagement initiatives with strong brand alignment</li>
+        <li>Event representation and on-site consumer interaction strategies</li>
+      </ul>
+    </div>
+
+    <!-- UNDERSTANDING POLAR ICE CREAM -->
+    <div class="section">
+      <div class="section-title">
+        <i class="fas fa-heart"></i>
+        <h3>Understanding Polar Ice Cream</h3>
+      </div>
+      <div class="text">
+        We understand <strong>Polar Ice Cream</strong> as a brand that is rooted in <strong>joy, community connection, and shared experiences</strong>. Our approach is designed to strengthen this positioning by ensuring every consumer touchpoint is intentional, visually impactful, and professionally executed to the highest standard.
+      </div>
+      <div class="text">
+        We also recognise that Polar Ice Cream is a brand built on <strong>accessibility, happiness, and community engagement</strong>, with a strong focus on creating joyful everyday moments for families and consumers across South Africa. In alignment with this, our activation strategy prioritises high-energy, people-centred experiences that drive product trial, emotional connection, and long-term brand loyalty at ground level.
+      </div>
+      <div class="text">
+        We understand the importance of mass-market reach and consistent visibility, and therefore tailor our approach to suit high-footfall environments, community activations, and accessible consumer touchpoints that reflect your brand promise of <strong>“sharing happiness.”</strong>
+      </div>
+    </div>
+
+    <!-- ACTIVATION EXAMPLES -->
+    <div class="section">
+      <div class="section-title">
+        <i class="fas fa-map-pin"></i>
+        <h3>Recommended Activations</h3>
+      </div>
+      <div class="text">
+        Examples of activations we would recommend include:
+      </div>
+      <ul class="grid-two">
+        <li>Mall and retail sampling stations</li>
+        <li>School and community “Happy Day” activations</li>
+        <li>Weekend street campaigns in high-traffic areas</li>
+        <li>Seasonal summer roadshows</li>
+        <li>Family-friendly pop-up experiences designed to increase direct consumer engagement and product interaction</li>
+      </ul>
+      <div class="text" style="margin-top: 0.5rem;">
+        <i class="fas fa-quote-left" style="color:#3b6eff;"></i> We do not approach activations as staffing deployments, but as curated brand experiences designed to increase product trial, strengthen emotional recall, and drive long-term consumer affinity.
+      </div>
+    </div>
+
+    <!-- GALLERY section (all 6 images) -->
+    <div class="section">
+      <div class="section-title">
+        <i class="fas fa-images"></i>
+        <h3>Our Team &amp; Promotional Style</h3>
+      </div>
+      <div class="gallery-modern">
+        <div class="gallery-card"><img src="images/girl7.jpeg" alt="promo model 7"></div>
+        <div class="gallery-card"><img src="images/girl8.jpeg" alt="promo model 8"></div>
+        <div class="gallery-card"><img src="images/girl9.jpeg" alt="promo model 9"></div>
+        <div class="gallery-card"><img src="images/girl10.jpeg" alt="promo model 10"></div>
+        <div class="gallery-card"><img src="images/girl11.jpeg" alt="promo model 11"></div>
+        <div class="gallery-card"><img src="images/girl12.jpeg" alt="promo model 12"></div>
+        <div class="gallery-card"><img src="images/girl13.jpeg" alt="promo model 13"></div>
+      </div>
+      <div class="text" style="font-size:0.85rem; margin-top: 0.6rem;">
+        <i class="fas fa-crown" style="color:#3b6eff;"></i> Professionally trained brand ambassadors, selected for presentation excellence and authentic brand embodiment.
+      </div>
+    </div>
+
+    <!-- CLOSING + NEXT STEPS -->
+    <div class="section">
+      <div class="section-title">
+        <i class="fas fa-flag-checkered"></i>
+        <h3>Next Steps</h3>
+      </div>
+      <div class="text">
+        We would welcome the opportunity to engage further with your team to explore how our agency can support and enhance your upcoming campaigns and sponsorship activities. We are confident in our ability to deliver consistent brand alignment, elevated consumer experiences, and measurable engagement outcomes.
+      </div>
+    </div>
+
+    <!-- SIGNATURE (exact contact details) -->
+    <div class="signature">
+      <div class="name">Amahle Phakathi</div>
+      <div class="role">Founder – Elite Promo Girls</div>
+      <div class="contact-line"><i class="fas fa-phone-alt"></i> 068 074 6254</div>
+      <div class="contact-line"><i class="fas fa-envelope"></i> amahlephakathi5@gmail.com</div>
+    </div>
+
+    <!-- footer motto -->
+    <div class="footer-motto">
+      <i class="fas fa-ice-cream" style="color: #3b6eff;"></i>  joy · community · shared experiences  <i class="fas fa-ice-cream" style="color: #3b6eff;"></i>
+    </div>
+  </div>
+</body>
+</html>
