@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elite Promo Girls · Deep27Cafe proposal</title>
+  <link rel="icon" type="image/x-icon" href="images/EPG.jpeg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #070a14;
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      display: flex;
+      justify-content: center;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+      background-image: radial-gradient(circle at 20% 30%, #121b36 0%, #060810 100%);
+    }
+    .webpage {
+      max-width: 1000px;
+      width: 100%;
+      background: #0c1022;
+      border-radius: 48px;
+      padding: 2.8rem 3rem;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 0 1px #1f305e, 0 0 30px rgba(59, 110, 255, 0.08);
+      border: 1px solid #1e2f5a;
+    }
+    .header-grid { display: flex; flex-direction: column; align-items: center; margin-bottom: 1.8rem; }
+    .logo-placeholder {
+      width: 130px; height: 130px; border-radius: 50%;
+      background: #0b0e1a; border: 2px solid #3b6eff;
+      box-shadow: 0 0 30px rgba(59, 110, 255, 0.25);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem; overflow: hidden;
+    }
+    .logo-placeholder img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block; }
+    .brand-title { text-align: center; }
+    .brand-title h1 {
+      font-weight: 300; letter-spacing: 8px; font-size: 2.2rem;
+      text-transform: uppercase; color: #f0f4ff; margin: 0;
+    }
+    .brand-title .sub { letter-spacing: 5px; font-size: 0.85rem; color: #6b88d0; margin-top: 2px; font-weight: 300; }
+    .brand-title .proposal-badge {
+      display: inline-block; margin-top: 12px;
+      border: 1px solid #2f4680; padding: 0.3rem 2rem;
+      border-radius: 60px; font-size: 0.8rem; letter-spacing: 3px;
+      color: #b0c5fa; background: #0f1a34;
+    }
+    .meeting-strip {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 2.5rem; background: #111b34; border-radius: 70px;
+      padding: 0.9rem 2.2rem; margin: 1.8rem 0 2.2rem 0;
+      border: 1px solid #233a6b; color: #cddaff; font-weight: 300;
+      font-size: 0.95rem; letter-spacing: 0.4px;
+    }
+    .meeting-strip i { color: #4b7aff; margin-right: 10px; width: 18px; }
+
+    .section-head {
+      font-size: 1.2rem; font-weight: 400; letter-spacing: 2px;
+      color: #f0f4ff; margin: 2rem 0 1rem 0;
+      border-left: 5px solid #3b6eff; padding-left: 20px;
+      text-transform: uppercase; display: flex; align-items: center;
+    }
+    .section-head i { color: #3b6eff; margin-right: 14px; font-size: 1.3rem; width: 28px; text-align: center; }
+
+    .text-block {
+      color: #d2ddfa; line-height: 1.7; font-weight: 300;
+      font-size: 0.98rem; margin-bottom: 0.6rem; padding-left: 4px;
+    }
+    .text-block strong { color: #f0f7ff; font-weight: 400; }
+
+    .service-grid, .commit-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.3rem 1.5rem; list-style: none; padding: 0; margin: 0.5rem 0 0.2rem 0;
+    }
+    .service-grid li, .commit-grid li {
+      color: #d0dbfc; font-weight: 300; padding: 0.2rem 0 0.2rem 28px;
+      position: relative; font-size: 0.95rem;
+    }
+    .service-grid li::before, .commit-grid li::before {
+      content: '◆'; position: absolute; left: 4px;
+      color: #3b6eff; font-size: 0.7rem; top: 6px;
+    }
+
+    .price-wrap {
+      background: #0d1630; border-radius: 60px; padding: 1.1rem 2.5rem;
+      display: inline-block; border: 1px solid #2d4682;
+      margin: 0.8rem 0 0.4rem 0; box-shadow: 0 0 25px rgba(59, 110, 255, 0.05);
+    }
+    .price-wrap .amount { color: #eaf0ff; font-size: 1.8rem; letter-spacing: 3px; font-weight: 300; }
+    .price-wrap .note { color: #7f98d4; font-size: 0.85rem; letter-spacing: 1px; margin-left: 10px; font-weight: 300; }
+    .price-foot { font-size: 0.85rem; color: #819ad6; margin-top: 6px; letter-spacing: 0.3px; }
+
+    /* signature */
+    .signature-row {
+      display: flex; flex-direction: column; align-items: flex-end;
+      margin-top: 2.5rem; padding-top: 1.2rem; border-top: 1px solid #1d2d5e;
+    }
+    .signature-row .sig-name { font-size: 1.2rem; font-weight: 400; letter-spacing: 3px; color: #f0f4ff; }
+    .signature-row .sig-title { color: #b0c2f0; font-weight: 300; letter-spacing: 2px; }
+    .signature-row .sig-contact { color: #8da3e0; margin-top: 6px; font-size: 0.95rem; letter-spacing: 1px; }
+    .signature-row .sig-contact i { color: #3b6eff; margin-right: 8px; }
+
+    .footer-line {
+      margin-top: 1.8rem; text-align: center; font-size: 0.7rem;
+      color: #3b5190; letter-spacing: 3px; border-top: 1px solid #1a264f;
+      padding-top: 1.2rem;
+    }
+
+    /* ----- IMAGE GALLERY (added) ----- */
+    .gallery-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.8rem; margin: 1.8rem 0 0.5rem 0;
+    }
+    .gallery-grid .img-card {
+      background: #0e142a; border-radius: 20px; overflow: hidden;
+      border: 1px solid #1f2f5a; transition: 0.2s;
+      aspect-ratio: 1 / 1;
+    }
+    .gallery-grid .img-card img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+
+    @media (max-width: 650px) {
+      .webpage { padding: 1.8rem 1.2rem; }
+      .logo-placeholder { width: 100px; height: 100px; }
+      .brand-title h1 { font-size: 1.5rem; letter-spacing: 4px; }
+      .meeting-strip { flex-direction: column; align-items: center; gap: 0.6rem; padding: 1rem; }
+      .service-grid, .commit-grid { grid-template-columns: 1fr; }
+      .price-wrap .amount { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="webpage">
+
+    <!-- ===== LOGO ===== -->
+    <div class="header-grid">
+      <div class="logo-placeholder">
+        <img src="images/EPG.jpeg" alt="Elite Promo Girls logo">
+      </div>
+      <div class="brand-title">
+        <h1>Elite Promo Girls</h1>
+        <div class="sub">PROMOTIONAL AGENCY</div>
+        <div class="proposal-badge">
+          <i class="fas fa-file-signature" style="margin-right: 6px;"></i> STAFFING PROPOSAL
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MEETING DETAILS (updated) ===== -->
+    <div class="meeting-strip">
+      <span><i class="fas fa-calendar-alt"></i> 19 May 2026</span>
+      <span><i class="fas fa-clock"></i> 12:00 PM</span>
+      <span><i class="fas fa-map-pin"></i> Deep27Cafe</span>
+      <span><i class="fas fa-handshake"></i> Elite Promo Girls x Deep27Cafe</span>
+    </div>
+
+    <!-- ===== INTRODUCTION ===== -->
+    <div class="section-head"><i class="fas fa-pen-fancy"></i> Introduction</div>
+    <div class="text-block">
+      <strong>Elite Promo Girls</strong> would like to sincerely thank <strong>Deep27Cafe</strong> for the opportunity to meet and discuss a potential collaboration. We are excited about the possibility of working together and building a professional relationship with your brand.
+    </div>
+    <div class="text-block">
+      Elite Promo Girls is a professional promotional staffing brand committed to providing confident, well-presented, and energetic promotional ladies who represent brands with professionalism and excellence.
+    </div>
+
+    <!-- ===== SERVICES ===== -->
+    <div class="section-head"><i class="fas fa-star"></i> Services Offered</div>
+    <div class="text-block">Elite Promo Girls is prepared to provide:</div>
+    <ul class="service-grid">
+      <li>6 professional promotional ladies</li>
+      <li>Well-groomed and presentable staff</li>
+      <li>Professional customer interaction</li>
+      <li>Positive brand representation</li>
+      <li>Reliable promotional support</li>
+      <li>Staff coordination and management</li>
+      <li>Event preparation and operational support</li>
+    </ul>
+    <div class="text-block" style="margin-top: 0.6rem;">
+      Our team understands the importance of professionalism, presentation, and creating an atmosphere that aligns with the image and standards of the brand we represent.
+    </div>
+
+    <!-- ===== INVESTMENT ===== -->
+    <div class="section-head"><i class="fas fa-coins"></i> Investment Proposal</div>
+    <div class="text-block">
+      Elite Promo Girls offers a professional promotional staffing package for <strong>Deep27Cafe</strong>, which includes:
+    </div>
+    <ul class="service-grid" style="grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));">
+      <li>6 professionally presented promotional ladies</li>
+      <li>Staff coordination and management</li>
+      <li>Grooming and preparation</li>
+      <li>Professional representation of the brand</li>
+      <li>Event readiness and operational support</li>
+    </ul>
+
+    <!-- ===== IMAGE GALLERY (all images from prompt) ===== -->
+    <div class="section-head" style="margin-top: 2rem;"><i class="fas fa-images"></i> Our Team &amp; Style</div>
+    <div class="gallery-grid">
+      <div class="img-card"><img src="images/girl1.jpeg" alt="promo girl style 1"></div>
+      <div class="img-card"><img src="images/girl2.jpeg" alt="promo girl style 2"></div>
+      <div class="img-card"><img src="images/girl3.jpeg" alt="promo girl style 3"></div>
+      <div class="img-card"><img src="images/girl4.jpeg" alt="promo girl style 4"></div>
+      <div class="img-card"><img src="images/girl5.jpeg" alt="promo girl style 5"></div>
+      <div class="img-card"><img src="images/girl6.jpeg" alt="promo girl style 6"></div>
+    </div>
+
+    <div style="margin: 1rem 0 0.2rem 0;">
+      <div class="price-wrap">
+        <span class="amount">R10,000 – R15,000</span>
+        <span class="note">proposed package</span>
+      </div>
+      <div class="price-foot">
+        <i class="fas fa-info-circle" style="color: #3b6eff;"></i> 
+        Final pricing may be adjusted depending on campaign requirements, working hours, and scope of work discussed during the meeting.
+      </div>
+    </div>
+
+    <!-- ===== COMMITMENT ===== -->
+    <div class="section-head"><i class="fas fa-handshake"></i> Commitment from Elite Promo Girls</div>
+    <div class="text-block">We are committed to:</div>
+    <ul class="commit-grid">
+      <li>Maintaining professionalism at all times</li>
+      <li>Providing reliable and respectful staff</li>
+      <li>Representing brands positively</li>
+      <li>Delivering quality promotional services</li>
+      <li>Building long-term professional relationships</li>
+    </ul>
+
+    <!-- ===== CONCLUSION ===== -->
+    <div class="section-head"><i class="fas fa-flag-checkered"></i> Conclusion</div>
+    <div class="text-block">
+      We appreciate the opportunity to meet with <strong>Deep27Cafe</strong> and discuss how Elite Promo Girls can contribute to your brand. We look forward to hearing your vision, expectations, and discussing how we can work together successfully.
+    </div>
+    <div class="text-block" style="margin-top: 0.2rem;">
+      Thank you for your time and consideration.
+    </div>
+
+    <!-- ===== SIGNATURE ===== -->
+    <div class="signature-row">
+      <div class="sig-name">Amahle Phakathi</div>
+      <div class="sig-title">Elite Promo Girls</div>
+      <div class="sig-contact"><i class="fas fa-phone-alt"></i> 068 074 6254</div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <div class="footer-line">
+      <i class="fas fa-circle" style="color: #3b6eff; font-size: 0.4rem; vertical-align: middle;"></i> 
+      &nbsp; professional · presentable · energetic &nbsp; 
+      <i class="fas fa-circle" style="color: #3b6eff; font-size: 0.4rem; vertical-align: middle;"></i>
+    </div>
+
+  </div>
+</body>
+</html>
